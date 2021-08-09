@@ -22,9 +22,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.keygenqt.exploring.screens.DoneScreen
-import com.keygenqt.exploring.screens.ExploringScreen
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.keygenqt.exploring.compose.screens.DoneScreen
+import com.keygenqt.exploring.compose.screens.ExploringScreen
 
+@ExperimentalPagerApi
 @Composable
 fun NavGraph(
     navController: NavHostController,

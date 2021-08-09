@@ -10,6 +10,7 @@ buildscript {
         hilt_compiler_versions = '1.0.0'
         hilt_android_versions = '2.38.1'
         hilt_compose_navigation_versions = '1.0.0-alpha03'
+        constraintlayout_compose_version = '1.0.0-beta02'
     }
     repositories {
         google()

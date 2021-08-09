@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
     <style name="Theme.Exploring.NoActionBar">
@@ -20,6 +21,5 @@
     </style>
 
     <style name="Theme.Exploring.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="Theme.Exploring.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
