@@ -39,9 +39,7 @@ fun NavGraph(
                 )
             }
             composable(NavScreen.Done.route) {
-                DoneScreen(
-                    viewModel = hiltViewModel(),
-                )
+                DoneScreen()
             }
         }
     }
