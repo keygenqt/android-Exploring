@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.exploring
 
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.keygenqt.exploring.ui.theme.ExploringTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -33,9 +38,37 @@ class MainActivity : ComponentActivity() {
     @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ExploringTheme {
                 NavGraph(rememberNavController())
+            }
+        }
+
+        val ob = ViewTreeObserver.OnPreDrawListener { false }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.uiState.collectLatest {
+                when (it.isReady) {
+                    is MainContract.ReadyState.Idle -> {
+                        window.decorView.findViewById<View>(android.R.id.content)?.viewTreeObserver
+                            ?.addOnPreDrawListener(ob)
+                    }
+                    is MainContract.ReadyState.Success -> {
+                        window.decorView.findViewById<View>(android.R.id.content)?.viewTreeObserver
+                            ?.removeOnPreDrawListener(ob)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.effect.collectLatest {
+                when (it) {
+                    is MainContract.Effect.ShowToast -> {
+                        Toast.makeText(this@MainActivity, "Error init application", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

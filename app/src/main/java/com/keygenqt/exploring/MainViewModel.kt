@@ -13,20 +13,67 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.exploring
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keygenqt.exploring.base.BaseViewModel
+import com.keygenqt.exploring.base.UiEffect
+import com.keygenqt.exploring.base.UiEvent
+import com.keygenqt.exploring.base.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
 
+class MainContract {
+
+    sealed class Event : UiEvent {
+        object Success : Event()
+        data class Failure(val error: Throwable) : Event()
+    }
+
+    data class State(
+        val isReady: ReadyState,
+    ) : UiState
+
+    sealed class ReadyState {
+        object Idle : ReadyState()
+        object Success : ReadyState()
+    }
+
+    sealed class Effect : UiEffect {
+        object ShowToast : Effect()
+    }
+
+}
+
+@HiltViewModel
+class MainViewModel @Inject constructor() :
+    BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
+
+    override fun createInitialState() = MainContract.State(MainContract.ReadyState.Idle)
+
+    override fun handleEvent(event: MainContract.Event) {
+        when (event) {
+            is MainContract.Event.Success -> {
+                setState { copy(isReady = MainContract.ReadyState.Success) }
+            }
+            is MainContract.Event.Failure -> {
+                setEffect { MainContract.Effect.ShowToast }
+            }
+        }
+    }
+
+    init {
+        viewModelScope.launch {
+            try {
+                delay(2000L)
+                setEvent(MainContract.Event.Success)
+            } catch (ex: Exception) {
+                setEvent(MainContract.Event.Failure(ex))
+            }
+        }
+    }
 }
