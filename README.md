@@ -6,6 +6,11 @@ _(in progress)_
 
 Sample application on [Jetpack Compose](https://developer.android.com/jetpack/compose) + MVI
 
+### Preview
+<p>
+<img src="data/preview.gif" width="35%"/>
+</p>
+
 # License
 
 ```
