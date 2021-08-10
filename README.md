@@ -1,6 +1,5 @@
 Exploring
 ===================
-_(in progress)_
 
 ![picture](data/150.png)
 
@@ -8,7 +7,7 @@ Sample application on [Jetpack Compose](https://developer.android.com/jetpack/co
 
 ### Preview
 <p>
-<img src="data/preview.gif" width="35%"/>
+<img src="data/vokoscreen-2021-08-10_10-46-30.gif" width="35%"/>
 </p>
 
 # License
