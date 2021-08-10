@@ -17,7 +17,7 @@
 package com.keygenqt.exploring
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,12 +31,18 @@ import com.keygenqt.exploring.compose.screens.ExploringScreen
 fun NavGraph(
     navController: NavHostController,
 ) {
+    val actions = remember(navController) {
+        Actions(navController)
+    }
+
     ProvideWindowInsets {
         NavHost(navController = navController, startDestination = NavScreen.Exploring.route) {
             composable(NavScreen.Exploring.route) {
-                ExploringScreen(
-                    viewModel = hiltViewModel(),
-                )
+                ExploringScreen { event ->
+                    when (event) {
+                        is ExploringEvents.ToDone -> actions.navigateToDone.invoke()
+                    }
+                }
             }
             composable(NavScreen.Done.route) {
                 DoneScreen()

@@ -7,6 +7,7 @@
     <!-- Exploring -->
     <string name="exploring_title">Exploring</string>
     <string name="exploring_next">Next</string>
+    <string name="exploring_done">Done</string>
     <string name="exploring_page_1">Welcome to the app Exploring!</string>
     <string name="exploring_page_2">This application is written in MVI architecture</string>
     <string name="exploring_page_3">Uses the latter stack, specifically Jetpack Compose</string>

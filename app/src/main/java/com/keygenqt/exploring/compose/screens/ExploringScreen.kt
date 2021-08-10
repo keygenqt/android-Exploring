@@ -1,6 +1,5 @@
 package com.keygenqt.exploring.compose.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,14 +16,16 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.keygenqt.exploring.MainViewModel
+import com.keygenqt.exploring.ExploringEvents
 import com.keygenqt.exploring.R
 import com.keygenqt.kchat.modules.common.ui.compose.MainScaffold
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @Composable
-fun ExploringScreen(viewModel: MainViewModel) {
+fun ExploringScreen(
+    onEvent: (ExploringEvents) -> Unit = {},
+) {
     MainScaffold(
         icon = null,
         label = stringResource(id = R.string.exploring_title),
@@ -71,7 +72,7 @@ fun ExploringScreen(viewModel: MainViewModel) {
                         scope.launch {
                             val index = pagerState.currentPage + 1
                             if (index == pagerState.pageCount) {
-                                Log.e("TAG", "DONE")
+                                onEvent(ExploringEvents.ToDone)
                             } else {
                                 pagerState.animateScrollToPage(index)
                             }
@@ -84,7 +85,9 @@ fun ExploringScreen(viewModel: MainViewModel) {
                         }
                 ) {
                     Text(
-                        text = stringResource(id = R.string.exploring_next).uppercase(),
+                        text = stringResource(
+                            if (pagerState.currentPage != pagerState.pageCount-1) R.string.exploring_next else R.string.exploring_done
+                        ).uppercase(),
                     )
                 }
             }
