@@ -18,7 +18,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.keygenqt.exploring.ExploringEvents
 import com.keygenqt.exploring.R
-import com.keygenqt.kchat.modules.common.ui.compose.MainScaffold
+import com.keygenqt.exploring.compose.common.MainScaffold
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi

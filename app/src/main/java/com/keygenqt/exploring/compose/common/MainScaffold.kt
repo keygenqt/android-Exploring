@@ -1,4 +1,4 @@
-package com.keygenqt.kchat.modules.common.ui.compose
+package com.keygenqt.exploring.compose.common
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.keygenqt.exploring.R
-import com.keygenqt.exploring.compose.common.Loader
 import com.keygenqt.exploring.ui.theme.ExploringTheme
 
 @Composable

@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.*
 import com.keygenqt.exploring.R
-import com.keygenqt.kchat.modules.common.ui.compose.MainScaffold
+import com.keygenqt.exploring.compose.common.MainScaffold
 
 @Composable
 fun DoneScreen() {
